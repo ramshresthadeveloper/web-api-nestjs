@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+BRANCH="uat"
+IMAGE_TAG="614788684359.dkr.ecr.ap-southeast-2.amazonaws.com/uat-web-api:latest"
+UAT_SERVICE="uat-web-api"
+UAT_CLUSTER="stage-cluster"
+UAT_TASK="uat-web-api"
+
+
+cd /home/diolog/uat/web_api
+
+git checkout $BRANCH
+
+git pull origin $BRANCH
+
+aws ssm get-parameters-by-path --path /diolog/uat/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/uat/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+
+docker build --force-rm -t $IMAGE_TAG .
+
+aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 614788684359.dkr.ecr.ap-southeast-2.amazonaws.com
+
+docker push $IMAGE_TAG
+
+aws ecs update-service --cluster ${UAT_CLUSTER} --service ${UAT_SERVICE} --task-definition ${UAT_TASK} --force-new-deployment
+ 
+docker image prune -f
+ 
+docker rmi $IMAGE_TAG
+

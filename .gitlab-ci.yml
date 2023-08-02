@@ -1,0 +1,93 @@
+variables:
+    GIT_STRATEGY: none
+    IMAGE_TAG: "web_api:dev"
+    SERVICE: web_api
+    BRANCH: dev
+    STAGE_BRANCH: stage
+    STAGE_IMAGE_TAG: "614788684359.dkr.ecr.ap-southeast-2.amazonaws.com/stage-web-api:latest"
+    STAGE_CLUSTER: "stage-cluster"
+    STAGE_TASK: "stage-web-api"
+    STAGE_SERVICE: "stage-web-api"
+    UAT_BRANCH: uat
+    UAT_IMAGE_TAG: "614788684359.dkr.ecr.ap-southeast-2.amazonaws.com/uat-web-api:latest"
+    UAT_CLUSTER: "stage-cluster"
+    UAT_TASK: "uat-web-api"
+    UAT_SERVICE: "uat-web-api"
+
+stages:
+    - build
+    - deploy
+
+build:dev:
+    stage: build
+    script:
+        - pwd
+        - cd /home/diolog/dev/web_api
+        - git checkout $BRANCH
+        - git pull origin $BRANCH
+        - aws ssm get-parameters-by-path --path /diolog/dev/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/dev/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+        - docker build --force-rm -t $IMAGE_TAG .
+    only:
+        - dev
+
+deploy:dev:
+    stage: deploy
+    script:
+        - pwd
+        - cd /home/diolog/dev/
+        - docker-compose rm -s -f $SERVICE
+        - docker-compose up -d $SERVICE
+        - docker image prune -f
+    only:
+        - dev
+    needs: [ "build:dev" ]
+
+build:stage:
+    stage: build
+    script:
+        - pwd
+        - cd /home/diolog/stage/web_api
+        - git checkout $STAGE_BRANCH
+        - git pull origin $STAGE_BRANCH
+        - aws ssm get-parameters-by-path --path /diolog/stage/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/stage/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+        - docker build --force-rm -t $STAGE_IMAGE_TAG .
+    only:
+        - stage
+
+deploy:stage:
+    stage: deploy
+    script:
+        - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 614788684359.dkr.ecr.ap-southeast-2.amazonaws.com
+        - docker push $STAGE_IMAGE_TAG
+        - aws ecs update-service --cluster ${STAGE_CLUSTER} --service ${STAGE_SERVICE} --task-definition ${STAGE_TASK} --force-new-deployment
+        - docker image prune -f
+        - docker rmi $STAGE_IMAGE_TAG
+
+    only:
+        - stage
+    needs: [ "build:stage" ]
+
+build:uat:
+    stage: build
+    script:
+        - pwd
+        - cd /home/diolog/uat/web_api
+        - git checkout $UAT_BRANCH
+        - git pull origin $UAT_BRANCH
+        - aws ssm get-parameters-by-path --path /diolog/uat/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/uat/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+        - docker build --force-rm -t $UAT_IMAGE_TAG .
+    only:
+        - uat
+
+deploy:uat:
+    stage: deploy
+    script:
+        - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 614788684359.dkr.ecr.ap-southeast-2.amazonaws.com
+        - docker push $UAT_IMAGE_TAG
+        - aws ecs update-service --cluster ${UAT_CLUSTER} --service ${UAT_SERVICE} --task-definition ${UAT_TASK} --force-new-deployment
+        - docker image prune -f
+        - docker rmi $UAT_IMAGE_TAG
+
+    only:
+        - uat
+    needs: [ "build:uat" ]

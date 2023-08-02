@@ -1,0 +1,63 @@
+pipelines:
+  branches:
+    dev:
+      - step:
+          name: 'Build and Deploy'
+          runs-on:
+            - 'self.hosted'
+            - 'linux'
+            - 'ebpearls'
+          script:
+            - pipe: atlassian/ssh-run:0.4.0
+              variables:
+                SSH_USER: $DEV_USER
+                SERVER: $DEV_HOST
+                SSH_KEY: $DEV_SSH_KEY
+                MODE: 'script'
+                COMMAND: 'cicd/dev'
+    stage:
+      - step:
+          name: 'Build and Deploy'
+          runs-on:
+            - 'self.hosted'
+            - 'linux'
+            - 'ebpearls'
+          script:
+            - pipe: atlassian/ssh-run:0.4.0
+              variables:
+                SSH_USER: $DEV_USER
+                SERVER: $DEV_HOST
+                SSH_KEY: $DEV_SSH_KEY
+                MODE: 'script'
+                COMMAND: 'cicd/stage'
+    uat:
+      - step:
+          name: 'Build and Deploy'
+          runs-on:
+            - 'self.hosted'
+            - 'linux'
+            - 'ebpearls'
+          script:
+            - pipe: atlassian/ssh-run:0.4.0
+              variables:
+                SSH_USER: $DEV_USER
+                SERVER: $DEV_HOST
+                SSH_KEY: $DEV_SSH_KEY
+                MODE: 'script'
+                COMMAND: 'cicd/uat'
+    prod:
+      - step:
+          name: '(Prod) Build and Deploy'
+          runs-on:
+            - 'self.hosted'
+            - 'linux'
+            - 'ebpearls'
+          script:
+            - pipe: atlassian/ssh-run:0.4.0
+              variables:
+                SSH_USER: $PROD_USER
+                SERVER: $PROD_HOST
+                SSH_KEY: $PROD_SSH_KEY
+                MODE: 'script'
+                COMMAND: 'cicd/prod'
+

@@ -1,0 +1,1431 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AccessTokenResponse {
+  accessTokenExpiresIn: String!
+  accesstoken: String!
+}
+
+type Activities {
+  _id: ID!
+  activityDescription: String!
+  companyId: ID!
+  createdAt: DateTime!
+  jobTitle: String!
+  profileImage: String
+  userId: ID!
+}
+
+type ActivityList {
+  items: [Activities!]!
+  meta: MetaForPagination!
+}
+
+input ActivityListInput {
+  limit: Int
+  page: Int!
+}
+
+input AddExecutiveMemberInput {
+  companyId: String!
+  digitalPicture: String!
+  linkedIn: String
+  name: String!
+  role: String!
+}
+
+input AddTeamMemberDto {
+  canCreateEvent: Boolean!
+  canInviteTeamMembers: Boolean!
+  canManageQuestion: Boolean!
+  companyId: ID!
+  email: String!
+  firstName: String!
+  hasAdministrativeControl: Boolean!
+  jobTitle: String!
+  lastName: String!
+  mobileNum: String!
+}
+
+input AddTeamNameInputDto {
+  companyId: ID!
+  teamName: String
+}
+
+input AdminUpdateInputDto {
+  _id: String
+  email: String!
+  password: String
+  phoneNumber: String
+  username: String!
+}
+
+type Announcement {
+  _id: ID!
+  announcementId: String
+  announcementSeenBy: [AnnouncementSeen!]!
+  asxCode: String
+  attachment: String
+  attachmentDuration: Float
+  attachmentSize: Float
+  attachmentThumbnail: String
+  attachmentTotalPages: Int
+  companyId: ID!
+  createdAt: DateTime!
+  deleted: Boolean!
+  fromAsx: Boolean!
+  isPinned: Boolean
+  media: Boolean
+  publishedDate: DateTime
+  starred: Boolean
+  status: String!
+  title: String!
+  totalViews: Float!
+  userId: ID
+}
+
+input AnnouncementDeleteInput {
+  announcementId: String!
+  companyId: String!
+}
+
+input AnnouncementDetailInput {
+  announcementId: ID!
+  companyId: ID!
+}
+
+input AnnouncementEditInput {
+  announcementId: ID!
+  attachment: String!
+  attachmentDuration: Float
+  attachmentSize: Float
+  attachmentThumbnail: String
+  attachmentTotalPages: Int
+  companyId: String!
+  isPinned: Boolean! = false
+  media: Boolean!
+  status: String!
+  title: String!
+}
+
+input AnnouncementInput {
+  attachment: String!
+  attachmentDuration: Float
+  attachmentSize: Float
+  attachmentThumbnail: String
+  attachmentTotalPages: Int
+  companyId: String!
+  isPinned: Boolean! = false
+  media: Boolean!
+  status: String!
+  title: String!
+}
+
+type AnnouncementList {
+  items: [AnnouncementListWithoutSeenBy!]!
+  meta: MetaForPagination!
+}
+
+input AnnouncementListInput {
+  companyId: ID!
+  deleted: Boolean
+  limit: Int
+  page: Int!
+  starred: Boolean
+  status: String
+}
+
+type AnnouncementListWithoutSeenBy {
+  _id: ID!
+  announcementId: String
+  asxCode: String
+  attachment: String
+  attachmentDuration: Float
+  attachmentSize: Float
+  attachmentThumbnail: String
+  attachmentTotalPages: Int
+  companyId: ID!
+  createdAt: DateTime!
+  deleted: Boolean!
+  fromAsx: Boolean!
+  isPinned: Boolean
+  media: Boolean
+  publishedDate: DateTime
+  seenPercentage: Float
+  starred: Boolean
+  status: String!
+  title: String!
+  totalViews: Float!
+  userId: ID
+}
+
+input AnnouncementPinInput {
+  announcementId: String!
+  companyId: String!
+  isPinned: Boolean!
+}
+
+type AnnouncementPinResponse {
+  status: String!
+}
+
+type AnnouncementSeen {
+  investorId: ID
+  seenAt: DateTime
+}
+
+input AnnouncementStarInput {
+  announcementId: String!
+  companyId: String!
+  starred: Boolean!
+}
+
+input ArchiveOrResolveEnquiriesInput {
+  companyId: ID!
+  enquiriesIds: [ID!]!
+}
+
+input AssignEnquiriesToCategoriesInput {
+  categoryId: ID!
+  companyId: ID!
+  enquiriesIds: [ID!]!
+}
+
+input AssignEnquiriesToStaff {
+  companyId: ID!
+  enquiriesIds: [ID!]!
+  staffId: ID!
+}
+
+type ComapnyEventList {
+  items: [EventListWithoutSeenBy!]!
+  meta: MetaForPagination!
+}
+
+type Company {
+  _id: ID!
+  abn: Float!
+  about: String
+  activateCron: Boolean
+  addressLineOne: String!
+  addressLineTwo: String
+  asxCode: String
+  companyCreator: Boolean!
+  companyLogo: String
+  disabled: Boolean
+  email: String
+  isAnnouncementConnected: Boolean
+  isInviteTeamSkipped: Boolean
+  isRegistered: Boolean
+  legalBusinessName: String!
+  location: GeoLocation
+  optionalBusinessName: String
+  permissions: Permissions
+  phoneNumber: String
+  postCode: Float!
+  state: String!
+  subscription: Subscription
+  suburb: String!
+  teamMembers: [TeamMember!]
+  teamName: String
+  totalCompanyViews: Float!
+  trialDays: Float
+  unseenMonthlyQuestionPromptCount: [UnseenMonthlyQuestionPromptCount!]
+  userId: ID!
+  validated: Boolean
+  verifiedAt: DateTime
+  websiteUrl: String
+}
+
+type CompanyDetail {
+  _id: ID!
+  abn: Float!
+  about: String
+  activateCron: Boolean
+  addressLineOne: String!
+  addressLineTwo: String
+  asxCode: String
+  companyCreator: Boolean!
+  companyCreatorLastLoggedIn: DateTime
+  companyLogo: String
+  disabled: Boolean
+  email: String
+  isAnnouncementConnected: Boolean
+  isInviteTeamSkipped: Boolean
+  isRegistered: Boolean
+  legalBusinessName: String!
+  location: GeoLocation
+  optionalBusinessName: String
+  permissions: Permissions
+  phoneNumber: String
+  postCode: Float!
+  state: String!
+  subscription: Subscription
+  suburb: String!
+  teamMembers: [TeamMemberWithUserDetail!]!
+  teamName: String
+  totalCompanyViews: Float!
+  trialDays: Float
+  unseenMonthlyQuestionPromptCount: [UnseenMonthlyQuestionPromptCount!]
+  userId: ID!
+  validated: Boolean
+  verifiedAt: DateTime
+  websiteUrl: String
+}
+
+type CompanyEvent {
+  _id: ID!
+  allDay: Boolean
+  attachment: String
+  companyId: ID!
+  date: DateTime
+  deleted: Boolean
+  description: String!
+  endDate: DateTime
+  endTime: DateTime
+  eventAttendies: String
+  eventSeenBy: [EventSeen!]!
+  isHoliday: Boolean
+  location: String
+  publishedDate: DateTime
+  startTime: DateTime
+  title: String!
+  userId: ID!
+}
+
+input CompanyEventDetailInput {
+  companyId: ID!
+  eventId: ID!
+}
+
+input CompanyEventEditInput {
+  allDay: Boolean!
+  attachment: String
+  companyId: ID!
+  date: DateTime!
+  description: String!
+  endDate: DateTime
+  endTime: String
+  eventAttendies: String!
+  eventId: ID!
+  isHoliday: Boolean!
+  location: String!
+  startTime: String
+  title: String!
+}
+
+input CompanyEventInput {
+  allDay: Boolean!
+  attachment: String
+  companyId: ID!
+  date: DateTime!
+  description: String!
+  endDate: DateTime
+  endTime: String
+  eventAttendies: String!
+  isHoliday: Boolean!
+  location: String!
+  startTime: String
+  title: String!
+}
+
+input CompanyIdInput {
+  companyId: String!
+}
+
+input CompanyIdOnlyInput {
+  companyId: String!
+}
+
+type CompanyListOfMemberResponse {
+  _id: String!
+  legalBusinessName: String!
+}
+
+type CompanyListWithCreatorFlag {
+  _id: ID!
+  abn: Float!
+  about: String
+  activateCron: Boolean
+  addressLineOne: String!
+  addressLineTwo: String
+  asxCode: String
+  companyCreator: Boolean!
+  companyLogo: String
+  disabled: Boolean
+  email: String
+  hasCreatedCompany: Boolean!
+  isAnnouncementConnected: Boolean
+  isInviteTeamSkipped: Boolean
+  isRegistered: Boolean
+  legalBusinessName: String!
+  location: GeoLocation
+  optionalBusinessName: String
+  permissions: Permissions
+  phoneNumber: String
+  postCode: Float!
+  state: String!
+  subscription: Subscription
+  suburb: String!
+  teamName: String
+  totalCompanyViews: Float!
+  trialDays: Float
+  unseenMonthlyQuestionPromptCount: [UnseenMonthlyQuestionPromptCount!]
+  userId: ID!
+  validated: Boolean
+  verifiedAt: DateTime
+  websiteUrl: String
+}
+
+type CompanyTeamMember {
+  companyCreator: Boolean
+  companyId: ID!
+  jobTitleInCompany: String
+  permissions: [TeamPermission!]
+  teamMember: User!
+  teamMemberId: ID
+}
+
+type ContactUs {
+  _id: ID!
+  message: String!
+  subject: String!
+  userId: String!
+}
+
+input CreateCompanyInput {
+  abn: Float!
+  addressLineOne: String!
+  addressLineTwo: String
+  asxCode: String
+  latitude: Float
+  legalBusinessName: String!
+  longitude: Float
+  optionalBusinessName: String
+  postCode: Float!
+  state: String!
+  suburb: String!
+  websiteUrl: String!
+}
+
+input CreateContactUsDto {
+  message: String!
+  subject: String!
+}
+
+input CreateEnquiryCategoryInput {
+  companyId: ID!
+  name: String!
+}
+
+input CreateFaqCategoryInput {
+  companyId: String!
+  name: String!
+}
+
+input CreateFaqInput {
+  answer: String!
+  companyId: String!
+  faqCategoryId: String!
+  question: String!
+}
+
+input CreatePageInput {
+  content: String!
+  slug: String!
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DeleteExecutiveMemberResponse {
+  status: String!
+}
+
+input DeleteFaqCategoryInput {
+  companyId: String!
+  faqCategoryId: String!
+}
+
+input DeleteFaqInput {
+  companyId: String!
+  faqId: String!
+}
+
+input EditEnquiryCategory {
+  companyId: ID!
+  enquiryCategoryId: ID!
+  name: String!
+}
+
+input EditExecutiveMemberInput {
+  digitalPicture: String!
+  linkedIn: String
+  memberId: String!
+  name: String!
+  role: String!
+}
+
+type EngagementData {
+  date: String!
+  seenPercentage: Float!
+  totalSeen: Float!
+}
+
+input EngagementInput {
+  companyId: String!
+  dataType: String!
+  timeRange: String!
+}
+
+type EngagementResponse {
+  changeInEngagementLevel: String!
+  data: [EngagementData!]!
+}
+
+type EnquiryCategory {
+  _id: ID!
+  companyId: ID!
+  createdBy: ID!
+  name: String!
+}
+
+input EnquiryCategoryDeleteInput {
+  companyId: String!
+  enquiryCategoryId: String!
+}
+
+type EnquiryCategoryList {
+  items: [EnquiryCategory!]!
+  meta: MetaForPagination!
+}
+
+input EnquiryCategoryListInput {
+  companyId: ID!
+  limit: Int
+  page: Int
+  searchText: String!
+}
+
+type EnquiryData {
+  _id: ID!
+  archivedBy: ID
+  assignedTo: ID
+  assigneeName: ID
+  audio: String
+  companyId: ID!
+  createdAt: DateTime
+  enquiryCategoryId: ID
+  enquiryCategoryName: String
+  enquiryResponse: EnquiryResponse
+  investor: EnquiryInvestor
+  investorId: ID!
+  question: String!
+  rating: String
+  resolvedBy: ID
+  status: String
+  subject: String!
+}
+
+type EnquiryDateGroupData {
+  date: String!
+  enquiries: [EnquiryData!]!
+}
+
+input EnquiryDetailInput {
+  companyId: ID!
+  enquiryId: ID!
+}
+
+type EnquiryHistoryResponse {
+  items: [EnquiryDateGroupData!]!
+  meta: MetaForPagination!
+}
+
+type EnquiryInvestor {
+  _id: ID
+  email: String
+  firstName: String
+  investorStatus: String
+  lastName: String
+  mobileNum: String
+  userName: String
+}
+
+type EnquiryList {
+  items: [EnquiryWithInvestor!]!
+  meta: MetaForPagination!
+}
+
+input EnquiryQuestionListInput {
+  assigneeId: String
+  categoryId: String
+  companyId: String!
+  enquiryStatus: String
+  investorStatus: String
+  limit: Int
+  page: Int!
+  searchText: String
+  sortDir: String
+}
+
+type EnquiryResponse {
+  _id: ID!
+  attachments: [String!]
+  content: String!
+  enquiryId: ID!
+  rating: String
+  title: String!
+}
+
+input EnquiryResponseInput {
+  attachments: [String!]
+  companyId: ID!
+  content: String!
+  enquiryId: ID!
+  status: String!
+  title: String!
+}
+
+type EnquiryStatusResponse {
+  status: String!
+}
+
+type EnquiryWithInvestor {
+  _id: ID!
+  archivedBy: ID
+  assignedTo: ID
+  audio: String
+  companyId: ID!
+  createdAt: DateTime
+  enquiryCategoryId: ID
+  enquiryCategoryName: String
+  enquiryResponse: EnquiryResponse
+  investor: EnquiryInvestor
+  investorId: ID!
+  question: String!
+  rating: String
+  resolvedBy: ID
+  status: String
+  subject: String!
+}
+
+input EventListInput {
+  companyId: String!
+  date: DateTime!
+  limit: Int
+  page: Int!
+}
+
+type EventListWithoutSeenBy {
+  _id: ID!
+  allDay: Boolean
+  attachment: String
+  companyId: ID!
+  date: DateTime
+  deleted: Boolean
+  description: String!
+  endDate: DateTime
+  endTime: DateTime
+  eventAttendies: String
+  isHoliday: Boolean
+  location: String
+  publishedDate: DateTime
+  startTime: DateTime
+  title: String!
+  userId: ID!
+}
+
+type EventSeen {
+  investorId: ID
+  seenAt: DateTime
+}
+
+input ExecutiveMemberIdInput {
+  memberId: String!
+}
+
+type ExecutiveTeam {
+  _id: ID!
+  digitalPicture: String!
+  linkedIn: String
+  name: String!
+  role: String!
+}
+
+input ExportEnquiryPdfInput {
+  companyId: ID!
+  enquiriesIds: [ID!]!
+}
+
+type Faq {
+  _id: ID
+  answer: String
+  companyId: String
+  displayOrder: Float
+  faqCategoryId: String
+  question: String
+}
+
+type FaqCategory {
+  _id: ID
+  companyId: String
+  displayOrder: Float
+  name: String
+}
+
+type FaqCategoryWithMessageResponse {
+  faqCategory: FaqCategory!
+  message: String
+}
+
+type FaqWithCategoryOutput {
+  _id: String!
+  categoryName: String!
+  companyId: String!
+  displayOrder: Float!
+  faqs: [Faq!]
+}
+
+type FaqWithMessageResponse {
+  faq: Faq!
+  message: String
+}
+
+input FeedBackCreateInput {
+  attachment: String
+  companyId: String!
+  description: String!
+  title: String!
+}
+
+type FileUrl {
+  attachmentDuration: Float
+  key: String
+  thumbnailKey: String
+}
+
+input ForgetPasswordInput {
+  email: String!
+}
+
+type GeoLocation {
+  coordinates: [Float!]!
+  type: String!
+}
+
+input GetEnquiriesHistoryInput {
+  companyId: ID!
+  investorId: ID!
+  limit: Int
+  page: Int!
+  searchText: String
+  viewedEnquiryId: ID!
+}
+
+input GoogleLoginInput {
+  fingerprint: String!
+  firebaseToken: String
+  id_token: String!
+}
+
+input IdOnly {
+  id: ID!
+}
+
+input InitialAddTeamMemberDto {
+  companyId: ID!
+  newTeamMembers: [InitialTeamMember!]!
+}
+
+input InitialTeamMember {
+  email: String!
+  role: String!
+}
+
+input InvestorSatisfactionInput {
+  companyId: String!
+}
+
+type InvestorSatisfactionResponse {
+  notSatisfiedInvestorPercentage: Float!
+  satisfiedInvestorPercentage: Float!
+  total: Float!
+}
+
+input InviteMemberUpdateInput {
+  acceptedEmailCommunication: Boolean! = false
+  firstName: String!
+  lastName: String!
+  mobileNum: String
+  password: String!
+  userId: ID!
+}
+
+type Issue {
+  _id: ID!
+  attachment: String
+  companyUserId: String!
+  description: String!
+  investorId: String!
+  isOther: Boolean
+  title: String!
+  userType: String
+}
+
+type LastOtp {
+  email: String!
+  expiresAt: String!
+}
+
+input ListMonthlyQuesitonPromptInput {
+  companyId: String!
+  limit: Int
+  page: Int
+}
+
+type ListMonthlyQuestionPromptResponse {
+  items: [MonthlyQuestionPrompt!]!
+  meta: MetaForPagination!
+}
+
+input LoginUserInput {
+  email: String!
+  fingerprint: String!
+  firebaseToken: String
+  password: String!
+}
+
+input LogoutUserInput {
+  fingerprint: String!
+}
+
+type Message {
+  message: String
+}
+
+type MetaForPagination {
+  currentPage: Int!
+  itemCount: Int!
+  itemsPerPage: Int!
+  totalItems: Int!
+  totalPages: Int!
+}
+
+type MonthlyQuestionPrompt {
+  _id: ID!
+  publishedDate: String
+  question: String
+  status: String!
+  totalCopiedTimes: Int!
+}
+
+type MonthlyQuestionPromptSeen {
+  investorId: ID
+  seenAt: DateTime
+}
+
+type Mutation {
+  addEnquiryResponse(enquiryResponseInput: EnquiryResponseInput!): EnquiryResponse!
+  addExecutiveMember(body: AddExecutiveMemberInput!): ExecutiveTeam!
+  addNewTeamMemberPassword(inviteMemberUpdateInput: InviteMemberUpdateInput!): Message!
+  addTeamMember(teamMemberInput: AddTeamMemberDto!): Message!
+  addTeamName(teamNameInput: AddTeamNameInputDto!): TeamNameResponse!
+  archiveEnquiries(archiveEnquiriesInput: ArchiveOrResolveEnquiriesInput!): Message!
+  assignEnquiriesToCategory(assignToCategoryInput: AssignEnquiriesToCategoriesInput!): Message!
+  assignEnquiriesToStaff(assignEnquiriesToStaff: AssignEnquiriesToStaff!): Message!
+  changePassword(passwordChangeInput: PasswordChangeInput!): Message!
+  createAnnouncement(announcementInput: AnnouncementInput!): AnnouncementListWithoutSeenBy!
+  createCompanyEvent(eventInput: CompanyEventInput!): CompanyEvent!
+  createEnquiryCategory(enquiryCategoryInput: CreateEnquiryCategoryInput!): EnquiryCategory!
+  createFaq(createFaqInput: CreateFaqInput!): FaqWithMessageResponse!
+  createFaqCategory(createFaqCategoryInput: CreateFaqCategoryInput!): FaqCategoryWithMessageResponse!
+  createPage(body: CreatePageInput!): Page!
+  createResponseTemplate(responseTemplateInput: ResponseTemplateInput!): ResponseTemplate!
+  deleteAnnouncement(announcementInput: AnnouncementDeleteInput!): AnnouncementListWithoutSeenBy!
+  deleteCompanyEvent(eventInput: CompanyEventDetailInput!): CompanyEvent!
+  deleteEnquiryCategory(enquiryCategory: EnquiryCategoryDeleteInput!): EnquiryCategory!
+  deleteExecutiveMember(body: ExecutiveMemberIdInput!): DeleteExecutiveMemberResponse!
+  deleteFaq(deleteFaqInput: DeleteFaqInput!): FaqWithMessageResponse!
+  deleteFaqCategory(deleteFaqCategoryInput: DeleteFaqCategoryInput!): FaqCategoryWithMessageResponse!
+  deletePage(body: PageSlugInput!): PageDeleteStatus!
+  deleteTeamMember(teamMemberInput: TeamMemberDetailInputDto!): Message!
+  editExecutiveMember(body: EditExecutiveMemberInput!): ExecutiveTeam!
+  generateNewAccessToken(body: RefreshTokenInput!): AccessTokenResponse!
+  getLastOtpSent: LastOtp!
+  hardDeleteResponseTemplate(responseTemplateDeleteInput: ResponseTemplateDeleteInput!): Message!
+  initialAddTeamMember(initalTeamMemberInput: InitialAddTeamMemberDto!): Message!
+  loginWithGoogle(googleToken: GoogleLoginInput!): UserLoginResponse!
+  orderFaq(orderFaqInput: OrderFaqInput!): Message!
+  orderFaqCategory(orderFaqCategoryInput: OrderFaqCategoryInput!): Message!
+  pinAnnouncement(announcementInput: AnnouncementPinInput!): AnnouncementPinResponse!
+  readNotification(notificaion: NotificationIdOnlyInput!): Message!
+  registerCompany(createCompanyInput: CreateCompanyInput!): RegisterCompanyResponse!
+  registerUser(userRegisterInput: UserRegisterInput!): RegisterUserResponse!
+  removeCompany(removeCompanyInput: IdOnly!): Message!
+  resolveEnquiries(resolveEnquiriesInput: ArchiveOrResolveEnquiriesInput!): Message!
+  selectCompanyForLogin(companyId: String!, fingerprint: String!): UserLoginResponse!
+  sendEmailOtp(sendEmailOtpInput: SendEmailOtpInput!): OtpWithMessage!
+  sendMessageToDiolog(contactUs: CreateContactUsDto!): ContactUs!
+  skipInviteTeam(companyId: String!): Message!
+  softDeleteAnnouncement(announcementInput: AnnouncementDeleteInput!): AnnouncementListWithoutSeenBy!
+  starAnnouncement(starAnnouncementInput: AnnouncementStarInput!): Announcement!
+  starResponseTemplate(responseTemplateStarInput: ResponseTemplateStarInput!): ResponseTemplate!
+  submitFeedback(feedbackInput: FeedBackCreateInput!): Issue!
+  switchCompany(companyId: String!, fingerprint: String!): SwitchCompanyResponse!
+  unarchiveEnquiries(unarchiveEnquiriesInput: ArchiveOrResolveEnquiriesInput!): Message!
+  updateAdmin(adminUpdateInputDto: AdminUpdateInputDto!): Message!
+  updateAnnouncement(announcementInput: AnnouncementEditInput!): AnnouncementListWithoutSeenBy!
+  updateCompany(updateCompanyInput: UpdateCompanyInput!): Company!
+  updateCompanyEvent(eventInput: CompanyEventEditInput!): CompanyEvent!
+  updateEnquiryCategory(enquiryCategoryInput: EditEnquiryCategory!): EnquiryCategory!
+  updateFaq(updateFaqInput: UpdateFaqInput!): Faq!
+  updateFaqCategory(updateFaqCategoryInput: UpdateFaqCategoryInput!): FaqCategory!
+  updateFirebaseToken(companyId: String!, fingerprint: String!, firebaseToken: String!): Message!
+  updateInviteInvestorChecklist(updateInviteInvestorChecklistInput: CompanyIdInput!): OnboardingChecklistResponse!
+  updatePage(body: UpdatePageInput!): Page!
+  updateResponseTemplate(responseTemplateEditInput: ResponseTemplateEditInput!): ResponseTemplate!
+  updateTeamMemberDetail(teamMemberInput: UpdateTeamMemberDetailDto!): Message!
+  updateTeamMemberPermissions(teamMemberPermissionsInput: UpdateTeamMemberPermissionInput!): Message!
+  updateUserProfile(updateProfileInput: UpdateProfileInput!): User!
+  uploadAnnouncementFile(file: Upload!): FileUrl!
+  uploadCompanyLogo(file: Upload!): FileUrl!
+  uploadEnquiryResponseFile(file: Upload!): FileUrl!
+  uploadExecutiveMemberDP(file: Upload!): FileUrl!
+  uploadFeebackAttachment(file: Upload!): FileUrl!
+  uploadProfileImage(file: Upload!): FileUrl!
+  uploadResponseTemplateAttachment(file: Upload!): FileUrl!
+  userForgotPassword(userEmailOnly: ForgetPasswordInput!): Message!
+  userLogin(loginUserInput: LoginUserInput!): UserLoginResponse!
+  userLogout(logoutUserInput: LogoutUserInput!): UserLogoutResponse!
+  userResetPassword(userResetPasswordInput: UserResetPasswordInput!): Message!
+  verifyEmailInviteMember(verifyEmailInviteTokenInput: VerifyEmailInviteMemberTokenInput!): VerifiedTeamMember!
+  verifyEmailOtp(verifyEmailOtpInput: VerifyEmailOtpInput!): VerifyOTPResponse!
+}
+
+type NewAndOutstandingQuestionResponse {
+  totalNewQuestions: Float!
+  totalOutstandingQuestions: Float!
+}
+
+input NewAndOutstandingQuestionsInput {
+  companyId: String!
+}
+
+type Notification {
+  _id: ID!
+  companyId: ID
+  createdAt: DateTime!
+  hasRead: Boolean
+  hasReadFromNotification: Boolean
+  investorId: ID
+  message: String
+  metaData: NotificationMetaData
+  notificationType: String
+  title: String
+  userId: ID
+  userObject: UserObject
+}
+
+input NotificationIdOnlyInput {
+  notificationId: ID!
+}
+
+type NotificationList {
+  isAllread: Boolean!
+  items: [Notification!]!
+  meta: MetaForPagination!
+}
+
+input NotificationListInput {
+  companyId: ID!
+  limit: Int
+  page: Int!
+}
+
+type NotificationMetaData {
+  announcementId: ID
+  companyId: ID
+  enquiryId: ID
+  enquiryResponseId: ID
+  eventId: ID
+  userId: ID
+}
+
+type OTPResponse {
+  message: String!
+  otpExpiresAt: DateTime!
+}
+
+type OnboardingChecklistResponse {
+  addCompanyBio: Boolean!
+  addCompanyLogo: Boolean!
+  addExecutive: Boolean!
+  addFAQ: Boolean!
+  completionTime: DateTime
+  inviteInvestors: Boolean!
+  showOnboardingChecklist: Boolean!
+}
+
+input OrderFaqCategoryInput {
+  companyId: String!
+  currentPosition: Float!
+  faqCategoryId: String!
+  targetPosition: Float!
+}
+
+input OrderFaqInput {
+  companyId: String!
+  currentPosition: Float!
+  faqId: String!
+  targetPosition: Float!
+}
+
+type OtpWithMessage {
+  message: String!
+  otpExpiresAt: DateTime!
+}
+
+type Page {
+  _id: String!
+  content: String!
+  slug: String!
+  title: String!
+}
+
+type PageDeleteStatus {
+  pageDeleteStatus: String!
+}
+
+input PageSlugInput {
+  slug: String!
+}
+
+type Pages {
+  pages: [Page!]
+}
+
+input PasswordChangeInput {
+  newPassword: String!
+  oldPassword: String!
+}
+
+type Permissions {
+  canCreateEvent: Boolean!
+  canInviteTeamMembers: Boolean!
+  canManageQuestion: Boolean!
+  hasAdministrativeControl: Boolean!
+}
+
+type Query {
+  exportEnquiryPdf(exportEnquiryPdfInput: ExportEnquiryPdfInput!): Message!
+  getActivities(activitiesListInput: ActivityListInput!): ActivityList!
+  getAllMonthlyQuestionPrompt(body: ListMonthlyQuesitonPromptInput!): ListMonthlyQuestionPromptResponse!
+  getCompanyAnnouncement(announcementInput: AnnouncementDetailInput!): AnnouncementListWithoutSeenBy!
+  getCompanyAnnouncements(announcementListInput: AnnouncementListInput!): AnnouncementList!
+  getCompanyDetail(company: CompanyIdOnlyInput!): CompanyDetail!
+  getCompanyEvent(eventInput: CompanyEventDetailInput!): CompanyEvent!
+  getCompanyEvents(eventsListInput: EventListInput!): ComapnyEventList!
+  getDraftAnnouncementCount(companyId: IdOnly!): TotalDraftCount!
+  getEngagementLevel(engagementInput: EngagementInput!): EngagementResponse!
+  getEngagementLevelCsv(engagementInput: EngagementInput!): Message!
+  getEnquiriesHistory(enquiriesHistoryInput: GetEnquiriesHistoryInput!): EnquiryHistoryResponse!
+  getEnquiryCategories(enquiryCategoryListInput: EnquiryCategoryListInput!): EnquiryCategoryList!
+  getEnquiryQuestion(enquiryDetailInput: EnquiryDetailInput!): EnquiryWithInvestor!
+  getEnquiryQuestions(enquiryListInput: EnquiryQuestionListInput!): EnquiryList!
+  getExecutiveMembers(body: CompanyIdInput!): [ExecutiveTeam!]!
+  getNotifications(notificationListInput: NotificationListInput!): NotificationList!
+  getOnboardingChecklistData(onboardingChecklistDataInput: CompanyIdInput!): OnboardingChecklistResponse!
+  getPage(body: PageSlugInput!): Page!
+  getPages: Pages!
+  getResponseTemplatesList(responseTemplateListInput: ResponseTemplateListInput!): ResponseTemplateList!
+  getSignedUrlFromKey(key: String!): SignedUrl!
+  getSubscription(companyId: String!): Subscription!
+  getTeamMember(teamMemberDetailInput: TeamMemberDetailInputDto!): CompanyTeamMember!
+  getTeamMembers(teamMembersListInput: TeamMemberListInput!): TeamMembersList!
+  getTeamMembersWithQuestionPermission(teamMembersListInput: TeamMemberListInput!): [User!]!
+  getTeamName(companyId: String!): TeamNameResponse!
+  getTotalEnquiryResponse(companyId: String!): TotalEnquiryResponse!
+  getTotalInterestedAndInvestedInvestor(CompanyIdOnlyInput: CompanyIdOnlyInput!): TotalInterestedAndInvestedInvestorResponse!
+  getTotalUnreadQuestions(companyId: String!): TotalUnReadEnquiry!
+  getUnreadNotificationCount(unreadNotificationCount: UnreadNotificationInput!): UnreadNotificationCountResponse!
+  getUnseenMonthlyQuestionCount(companyId: String!): UnseenMonthlyQuestionCount!
+  investorSatisfaction(InvestorSatisfactionInput: InvestorSatisfactionInput!): InvestorSatisfactionResponse!
+  listCompaniesForSwitchCompanies: [CompanyListOfMemberResponse!]!
+  listFaqCategories(companyId: String!): [FaqCategory!]!
+  listFaqCategoryWithFaqs(companyId: String!): [FaqWithCategoryOutput!]!
+  listFaqInCategory(companyId: String!): [FaqWithCategoryOutput!]!
+  loggedInUserDetail: User!
+  markAllNotificationAsRead(markAllNotificationAsRead: CompanyIdInput!): Message!
+  newAndTotalOutstandingQuestions(newAndOutstandingQuestionInput: NewAndOutstandingQuestionsInput!): NewAndOutstandingQuestionResponse!
+  subscribeMailchimp: UserLogoutResponse!
+  triggerCustomerJourney: EnquiryStatusResponse!
+  userCompanyList: [UserCompanyList!]!
+  userCompanyListWithCreatorFlag: [CompanyListWithCreatorFlag!]!
+}
+
+input RefreshTokenInput {
+  refreshtoken: String!
+}
+
+type RegisterCompanyResponse {
+  company: Company!
+}
+
+type RegisterUserResponse {
+  otpExpiresAt: DateTime!
+}
+
+type ResponseTemplate {
+  _id: ID!
+  attachments: [String!]!
+  companyId: ID!
+  content: String
+  deleted: String!
+  starred: String!
+  title: String!
+  updatedAt: DateTime
+}
+
+input ResponseTemplateDeleteInput {
+  companyId: String!
+  responseTemplateId: ID!
+}
+
+input ResponseTemplateEditInput {
+  attachments: [String!]
+  companyId: String!
+  content: String
+  deleted: Boolean!
+  responseTemplateId: ID!
+  starred: Boolean!
+  title: String!
+}
+
+input ResponseTemplateInput {
+  attachments: [String!]
+  companyId: String!
+  content: String
+  title: String!
+}
+
+type ResponseTemplateList {
+  items: [ResponseTemplate!]!
+  meta: MetaForPagination!
+}
+
+input ResponseTemplateListInput {
+  companyId: ID!
+  limit: Int
+  page: Int!
+  responseTemplateType: String
+}
+
+input ResponseTemplateStarInput {
+  companyId: String!
+  responseTemplateId: String!
+  starred: Boolean!
+}
+
+input SendEmailOtpInput {
+  email: String!
+  fingerprint: String!
+  type: String!
+}
+
+type SignedUrl {
+  signedUrl: String
+}
+
+type Subscription {
+  activationDate: DateTime
+  endDate: DateTime
+  id: String
+  plan: String
+  renewable: Boolean
+  startDate: DateTime
+  status: String
+  stripeCustomerId: String
+}
+
+type SwitchCompanyResponse {
+  token: Tokens!
+}
+
+type TeamMember {
+  invitationAccepted: Boolean
+  jobTitle: String
+  permissions: [TeamPermission!]
+  userId: ID
+}
+
+input TeamMemberDetailInputDto {
+  companyId: ID!
+  teamMemberId: ID!
+}
+
+input TeamMemberListInput {
+  companyId: ID
+  limit: Int
+  page: Int!
+  searchText: String
+}
+
+type TeamMemberWithUserDetail {
+  invitationAccepted: Boolean
+  jobTitle: String
+  permissions: [TeamPermission!]
+  user: User!
+  userId: ID
+}
+
+type TeamMembersList {
+  items: [CompanyTeamMember!]!
+  meta: MetaForPagination!
+}
+
+type TeamNameResponse {
+  teamName: String
+}
+
+type TeamPermission {
+  allowed: Boolean
+  name: String
+}
+
+type Tokens {
+  accessToken: String!
+  accessTokenExpiresIn: String!
+  refreshToken: String!
+  refreshTokenExpiresIn: String!
+}
+
+type TotalDraftCount {
+  totalDrafts: Float!
+}
+
+type TotalEnquiryResponse {
+  totalArchived: Int!
+  totalAssigned: Int!
+  totalOutstanding: Int!
+  totalResolved: Int!
+  totalUnread: Int!
+}
+
+type TotalInterestedAndInvestedInvestorResponse {
+  totalInterestedInvestor: Float!
+  totalInvestedInvestor: Float!
+}
+
+type TotalUnReadEnquiry {
+  total: Int!
+}
+
+type UnreadNotificationCountResponse {
+  count: Float!
+}
+
+input UnreadNotificationInput {
+  companyId: ID!
+}
+
+type UnseenMonthlyQuestionCount {
+  count: Float!
+}
+
+type UnseenMonthlyQuestionPromptCount {
+  count: Float!
+  userId: ID!
+}
+
+input UpdateCompanyInput {
+  about: String!
+  addressLineOne: String!
+  addressLineTwo: String
+  companyId: ID!
+  companyLogo: String
+  email: String
+  latitude: Float
+  legalBusinessName: String!
+  longitude: Float
+  optionalBusinessName: String
+  phoneNumber: String
+  postCode: Float!
+  state: String!
+  suburb: String!
+  websiteUrl: String!
+}
+
+input UpdateFaqCategoryInput {
+  companyId: String!
+  faqCategoryId: String!
+  name: String!
+}
+
+input UpdateFaqInput {
+  answer: String!
+  companyId: String!
+  faqId: String!
+  question: String!
+}
+
+input UpdatePageInput {
+  content: String!
+  id: ID!
+  slug: String!
+  title: String!
+}
+
+input UpdateProfileInput {
+  email: String!
+  firstName: String!
+  jobTitle: String
+  lastName: String!
+  mobileNum: String
+  profileImage: String
+}
+
+input UpdateTeamMemberDetailDto {
+  companyId: ID!
+  firstName: String!
+  jobTitle: String!
+  lastName: String!
+  mobileNum: String!
+  profileImage: String
+  teamMemberId: ID!
+}
+
+input UpdateTeamMemberPermissionInput {
+  canCreateEvent: Boolean!
+  canInviteTeamMembers: Boolean!
+  canManageQuestion: Boolean!
+  companyId: ID!
+  hasAdministrativeControl: Boolean!
+  teamMemberId: ID!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type User {
+  _id: ID!
+  acceptedEmailCommunication: Boolean!
+  acceptedTAndC: Boolean!
+  companyCreator: Boolean!
+  email: String!
+  firstName: String
+  jobTitle: String
+  lastLoggedInAt: DateTime
+  lastName: String
+  mobileNum: String
+  plan: String
+  profileImage: String
+  receiveNotification: Boolean!
+  registeredWithGoogle: Boolean
+  stripeCustomerId: String
+  subscriptionRenewable: Boolean
+  subscriptionStatus: String
+  userName: String
+  verifiedAt: DateTime
+}
+
+type UserCompanyList {
+  _id: ID!
+  abn: Float!
+  about: String
+  activateCron: Boolean
+  addressLineOne: String!
+  addressLineTwo: String
+  asxCode: String
+  companyCreator: Boolean!
+  companyLogo: String
+  disabled: Boolean
+  email: String
+  isAnnouncementConnected: Boolean
+  isInviteTeamSkipped: Boolean
+  isRegistered: Boolean
+  legalBusinessName: String!
+  location: GeoLocation
+  optionalBusinessName: String
+  permissions: Permissions
+  phoneNumber: String
+  postCode: Float!
+  state: String!
+  subscription: Subscription
+  suburb: String!
+  teamName: String
+  totalCompanyViews: Float!
+  trialDays: Float
+  unseenMonthlyQuestionPromptCount: [UnseenMonthlyQuestionPromptCount!]
+  userId: ID!
+  validated: Boolean
+  verifiedAt: DateTime
+  websiteUrl: String
+}
+
+type UserDataResponse {
+  companyId: String
+  inCompany: Boolean
+  token: Tokens!
+  user: User!
+}
+
+type UserLoginResponse {
+  otpData: OTPResponse
+  userData: UserDataResponse
+}
+
+type UserLogoutResponse {
+  status: String!
+}
+
+type UserObject {
+  _id: ID
+  jobTitle: String
+  profileImage: String
+  userName: String
+}
+
+input UserRegisterInput {
+  acceptedEmailCommunication: Boolean! = false
+  acceptedTAndC: Boolean!
+  email: String!
+  fingerprint: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+input UserResetPasswordInput {
+  password: String!
+  token: String!
+}
+
+type VerifiedTeamMember {
+  email: String!
+  firstName: String
+  lastName: String
+  legalBusinessName: String
+  mobileNum: String
+  userId: String!
+  verifiedAt: String
+}
+
+input VerifyEmailInviteMemberTokenInput {
+  token: String!
+}
+
+input VerifyEmailOtpInput {
+  email: String!
+  fingerprint: String!
+  firebaseToken: String
+  otpCode: Float!
+}
+
+type VerifyOTPResponse {
+  userData: UserDataResponse
+}

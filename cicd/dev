@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+BRANCH="dev"
+IMAGE_TAG="web_api:dev"
+SERVICE="web_api"
+
+cd /home/diolog/dev/web_api
+
+git checkout $BRANCH
+
+git pull origin $BRANCH
+
+aws ssm get-parameters-by-path --path /diolog/dev/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/dev/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+
+docker build --force-rm -t $IMAGE_TAG .
+
+
+cd /home/diolog/dev/
+docker-compose rm -s -f $SERVICE
+docker-compose up -d $SERVICE
+docker image prune -f
