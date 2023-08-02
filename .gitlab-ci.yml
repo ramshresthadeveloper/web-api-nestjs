@@ -22,10 +22,10 @@ build:dev:
     stage: build
     script:
         - pwd
-        - cd /home/diolog/dev/web_api
+        - cd /home/nestjs/dev/web_api
         - git checkout $BRANCH
         - git pull origin $BRANCH
-        - aws ssm get-parameters-by-path --path /diolog/dev/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/dev/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+        - aws ssm get-parameters-by-path --path /nestjs/dev/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/nestjs/dev/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
         - docker build --force-rm -t $IMAGE_TAG .
     only:
         - dev
@@ -34,7 +34,7 @@ deploy:dev:
     stage: deploy
     script:
         - pwd
-        - cd /home/diolog/dev/
+        - cd /home/nestjs/dev/
         - docker-compose rm -s -f $SERVICE
         - docker-compose up -d $SERVICE
         - docker image prune -f
@@ -46,10 +46,10 @@ build:stage:
     stage: build
     script:
         - pwd
-        - cd /home/diolog/stage/web_api
+        - cd /home/nestjs/stage/web_api
         - git checkout $STAGE_BRANCH
         - git pull origin $STAGE_BRANCH
-        - aws ssm get-parameters-by-path --path /diolog/stage/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/stage/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+        - aws ssm get-parameters-by-path --path /nestjs/stage/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/nestjs/stage/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
         - docker build --force-rm -t $STAGE_IMAGE_TAG .
     only:
         - stage
@@ -71,10 +71,10 @@ build:uat:
     stage: build
     script:
         - pwd
-        - cd /home/diolog/uat/web_api
+        - cd /home/nestjs/uat/web_api
         - git checkout $UAT_BRANCH
         - git pull origin $UAT_BRANCH
-        - aws ssm get-parameters-by-path --path /diolog/uat/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/uat/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+        - aws ssm get-parameters-by-path --path /nestjs/uat/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/nestjs/uat/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
         - docker build --force-rm -t $UAT_IMAGE_TAG .
     only:
         - uat

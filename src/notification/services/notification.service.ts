@@ -142,14 +142,14 @@ export class NotificationService {
       if (firebaseTokens.length > 0) {
         pushNotificationPayload = {
           notification: {
-            title: 'You have been assigned a question on Diolog!',
+            title: 'You have been assigned a question on nestjs!',
             body: 'Respond to your investors to let them know you’re listening.',
           },
           tokens: firebaseTokens,
           webpush: {
             fcmOptions: {},
             notification: {
-              icon: 'https://app.diolog.com.au/site-icon.svg',
+              icon: 'https://app.nestjs.com.au/site-icon.svg',
             },
           },
         };
@@ -366,7 +366,7 @@ export class NotificationService {
   ) {
     try {
       const { companyId, message, metaData } = notificationCreateInput;
-      const title = 'Diolog';
+      const title = 'nestjs';
       const notificationType = 'enquiry-responded';
       const userObject = {
         _id: user._id,

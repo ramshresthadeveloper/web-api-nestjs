@@ -30,7 +30,7 @@ export class StripeService {
   async getStripeProducts() {
     try {
       let products = await this.stripe.products.search({
-        query: "active:'true' AND metadata['diolog_subscription']:'true'",
+        query: "active:'true' AND metadata['nestjs_subscription']:'true'",
       });
       let items = [];
       for (let i = 0; i < products.data.length; i++) {
@@ -167,9 +167,9 @@ export class StripeService {
         },
         business_profile: {
           privacy_policy_url:
-            'https://www.diolog.com.au/help-articles/privacy-policy',
+            'https://www.nestjs.com.au/help-articles/privacy-policy',
           terms_of_service_url:
-            'https://www.diolog.com.au/help-articles/mobile-application-terms-of-use',
+            'https://www.nestjs.com.au/help-articles/mobile-application-terms-of-use',
         },
       };
       if (configurationId) {

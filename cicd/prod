@@ -3,19 +3,19 @@ set -e
 
 PROD_BRANCH="prod"
 PROD_IMAGE_TAG="614788684359.dkr.ecr.ap-southeast-2.amazonaws.com/prod-web-api-service:latest"
-PROD_CLUSTER="diolog-lt-cluster"
+PROD_CLUSTER="nestjs-lt-cluster"
 PROD_TASK="prod-web-api-service"
 PROD_SERVICE="prod-web-api-service"
 
-cd /home/diolog/prod/diolog-company-web-app-api
+cd /home/nestjs/prod/nestjs-company-web-app-api
 git checkout $PROD_BRANCH
 git pull origin $PROD_BRANCH
 
 # Merge FIREBASE_PRIVATE_KEY and original .env into a single one
-aws ssm get-parameter --with-decryption --output text --query 'Parameter.Value' --name /diolog/prod/web-api/env | base64 -d > .env
+aws ssm get-parameter --with-decryption --output text --query 'Parameter.Value' --name /nestjs/prod/web-api/env | base64 -d > .env
 #echo -e '\n' >> .env
-#aws ssm get-parameter --with-decryption --output text --query 'Parameter.Value' --name /diolog/prod/web-api/FIREBASE_PRIVATE_KEY | base64 -d >> .env
-# aws ssm get-parameters-by-path --path /diolog/prod/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/prod/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+#aws ssm get-parameter --with-decryption --output text --query 'Parameter.Value' --name /nestjs/prod/web-api/FIREBASE_PRIVATE_KEY | base64 -d >> .env
+# aws ssm get-parameters-by-path --path /nestjs/prod/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/nestjs/prod/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
 
 docker build --force-rm -t $PROD_IMAGE_TAG .
 

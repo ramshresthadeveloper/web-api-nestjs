@@ -3,9 +3,9 @@ const responseMessages = {
     // Announcement
     ANNOUNCEMENT_NOT_FOUND: 'Announcement not found.',
     ANNOUNCEMENT_FROM_ASX_UNEDITABLE:
-      'Only annoucement created within diolog are editable.',
+      'Only annoucement created within nestjs are editable.',
     ANNOUNCEMENT_FROM_ASX_UNDELETEABLE:
-      'Only annoucement created within diolog can be deleted.',
+      'Only annoucement created within nestjs can be deleted.',
     NO_ACCESS: 'You do not have permission to access.',
     // Admin
     ADMIN_UPADATE_SUCCESS: 'Admin updated successfully.',

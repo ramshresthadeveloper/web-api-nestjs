@@ -175,7 +175,7 @@ export class EmailService {
     }
   }
 
-  async sendPasswordChangedMail(email: string, firstName = 'diolog user') {
+  async sendPasswordChangedMail(email: string, firstName = 'nestjs user') {
     try {
       const template = await this.emailTemplateRepository.getTemplateBySlug(
         'user-password-changed',

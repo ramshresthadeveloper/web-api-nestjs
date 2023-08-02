@@ -33,7 +33,7 @@ async function bootstrap() {
     }),
   );
   app.use(graphqlUploadExpress({}));
-  const logger = new Logger('Diolog', { timestamp: true });
+  const logger = new Logger('nestjs', { timestamp: true });
   const PORT = process.env.API_PORT || 5000;
   await app.listen(PORT, () => {
     logger.log(`Api listening on port: ${PORT}`);

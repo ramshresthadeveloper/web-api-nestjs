@@ -870,7 +870,7 @@ type Mutation {
   resolveEnquiries(resolveEnquiriesInput: ArchiveOrResolveEnquiriesInput!): Message!
   selectCompanyForLogin(companyId: String!, fingerprint: String!): UserLoginResponse!
   sendEmailOtp(sendEmailOtpInput: SendEmailOtpInput!): OtpWithMessage!
-  sendMessageToDiolog(contactUs: CreateContactUsDto!): ContactUs!
+  sendMessageTonestjs(contactUs: CreateContactUsDto!): ContactUs!
   skipInviteTeam(companyId: String!): Message!
   softDeleteAnnouncement(announcementInput: AnnouncementDeleteInput!): AnnouncementListWithoutSeenBy!
   starAnnouncement(starAnnouncementInput: AnnouncementStarInput!): Announcement!

@@ -8,13 +8,13 @@ STAGE_CLUSTER="stage-cluster"
 STAGE_TASK="stage-web-api"
 
 
-cd /home/diolog/stage/web_api
+cd /home/nestjs/stage/web_api
 
 git checkout $BRANCH
 
 git pull origin $BRANCH
 
-aws ssm get-parameters-by-path --path /diolog/stage/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/stage/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+aws ssm get-parameters-by-path --path /nestjs/stage/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/nestjs/stage/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
 
 docker build --force-rm -t $IMAGE_TAG .
 

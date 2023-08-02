@@ -8,13 +8,13 @@ UAT_CLUSTER="stage-cluster"
 UAT_TASK="uat-web-api"
 
 
-cd /home/diolog/uat/web_api
+cd /home/nestjs/uat/web_api
 
 git checkout $BRANCH
 
 git pull origin $BRANCH
 
-aws ssm get-parameters-by-path --path /diolog/uat/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/diolog/uat/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
+aws ssm get-parameters-by-path --path /nestjs/uat/web-api/ --query 'Parameters[].[Name,Value]' --with-decryption --output text | sed -E 's#/nestjs/uat/web-api/([^[:space:]]*)[[:space:]]*#\1=#g' > .env
 
 docker build --force-rm -t $IMAGE_TAG .
 

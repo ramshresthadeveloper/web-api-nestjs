@@ -13,7 +13,7 @@ export class ContactUsResolver {
   
   @UseGuards(GqlAuthGuard)
   @Mutation(() => ContactUs)
-  sendMessageToDiolog(
+  sendMessageToNestjs(
     @CurrentUser() user: User,
     @Args('contactUs') contactUs: CreateContactUsDto
   ) {

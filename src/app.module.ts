@@ -47,7 +47,7 @@ import { CompanyViewsModule } from './company-views/company-views.module';
       isGlobal: true,
     }),
     ServeStaticModule.forRoot({
-      exclude: ['/api*', '/diolog*', '/^((?!cms).)*$'],
+      exclude: ['/api*', '/nestjs*', '/^((?!cms).)*$'],
     }),
 
     MongooseModule.forRootAsync({
@@ -86,7 +86,7 @@ import { CompanyViewsModule } from './company-views/company-views.module';
       playground: false,
       cache: 'bounded',
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      path: '/diolog',
+      path: '/nestjs',
     }),
     ScheduleModule.forRoot(),
 
